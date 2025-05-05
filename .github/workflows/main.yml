@@ -1,0 +1,28 @@
+name: C CI - Bilheteria
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonar repositório
+      uses: actions/checkout@v3
+
+    - name: Instalar compilador GCC
+      run: sudo apt-get install -y gcc
+
+    - name: Compilar programa principal
+      run: gcc src/bilheteria.c src/logica.c -o bilheteria
+
+    - name: Compilar testes
+      run: gcc tests/testes.c src/logica.c -o testes
+
+    - name: Executar testes
+      run: ./testes
