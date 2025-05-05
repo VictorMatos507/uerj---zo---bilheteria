@@ -1,4 +1,4 @@
-name: C CI - Bilheteria
+ name: C CI - Bilheteria
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
     - name: Clonar repositório
       uses: actions/checkout@v3
 
-    - name: Instalar compilador GCC
-      run: sudo apt-get install -y gcc
+    - name: Instalar GCC
+      run: sudo apt-get update && sudo apt-get install -y gcc
 
     - name: Compilar programa principal
       run: gcc src/bilheteria.c src/logica.c -o bilheteria
 
     - name: Compilar testes
-      run: gcc tests/testes.c src/logica.c -o testes
+      run: gcc tests/testes.c src/logica.c -I./src -o testes
 
     - name: Executar testes
       run: ./testes
